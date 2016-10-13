@@ -16,25 +16,40 @@
     <script>
         $(function () {
             // Reference the auto-generated proxy for the hub.
-            var gameRoom = $.connection.gameHallHub;
+            //var gameRoom = $.connection.gameHallHub;
+            var connection = $.hubConnection();
+
             // Create a function that the hub can call back to display messages.
-            gameRoom.client.hello = function (name, message) {
-                // Add the message to the page.
-                $('#discussion').append('<li><strong>' + htmlEncode(name)
-                    + '</strong>: ' + htmlEncode(message) + '</li>');
-            };
+            //gameRoom.client.hello = function (name, message) {
+            //    // Add the message to the page.
+            //    $('#discussion').append('<li><strong>' + htmlEncode(name)
+            //        + '</strong>: ' + htmlEncode(message) + '</li>');
+            //};
+
+            //gameRoom.client.getRole = function (role) {
+            //    $('#discussion').append('<li>Role :<strong>' + htmlEncode(role.Name) + '</strong></li>');
+            //}
             // Get the user name and store it to prepend to messages.
             $('#displayname').val(prompt('Enter your name:', ''));
             // Set initial focus to message input box.
             $('#message').focus();
             // Start the connection.
-            $.connection.hub.start().done(function () {
+            connection.start().done(function () {
                 $('#sendmessage').click(function () {
                     // Call the Send method on the hub.
-                    gameRoom.server.send($('#displayname').val(), $('#message').val());
+                    gameHallHubProxy.invoke('send', $('#displayname').val(), $('#message').val());
+                    //gameRoom.server.update({ Name: $('#displayname').val() });
                     // Clear text box and reset focus for next comment.
                     $('#message').val('').focus();
                 });
+            });
+
+
+            var gameHallHubProxy = connection.createHubProxy('gameHallHub');
+            gameHallHubProxy.on('hello', function (name, message) {
+                // Add the message to the page.
+                $('#discussion').append('<li><strong>' + htmlEncode(name)
+                    + '</strong>: ' + htmlEncode(message) + '</li>');
             });
         });
         // This optional function html-encodes messages for display in the page.

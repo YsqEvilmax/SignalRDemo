@@ -13,9 +13,14 @@ namespace SignalRDemo.Hubs
             Clients.All.hello(name, message);
         }
 
-        public async void CreateRoom()
+        public void Update(Role role)
         {
-            await Groups.Add(this.Context.ConnectionId, Guid.NewGuid().ToString());
+            Clients.Caller.getRole(role);
         }
+    }
+
+    public class Role
+    {
+        public string Name { get; set; }
     }
 }
