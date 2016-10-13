@@ -13,14 +13,9 @@ namespace SignalRDemo.Hubs
             Clients.All.hello(name, message);
         }
 
-        public void Update(Role role)
-        {
-            Clients.Caller.getRole(role);
-        }
-    }
-
-    public class Role
-    {
-        public string Name { get; set; }
+        //public void Update(Role role)
+        //{
+        //    Clients.Caller.getRole(role);
+        //}
     }
 }
