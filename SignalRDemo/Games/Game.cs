@@ -7,7 +7,11 @@ namespace SignalRDemo.Games
 {
     public abstract class Game
     {
-        public RoleManager roleManager = new RoleManager();
+        public Game()
+        {
+            RoleManager = new RoleManager();
+        }
+        public RoleManager RoleManager { get; }
 
         public abstract void Initialize();
     }

@@ -10,21 +10,45 @@ namespace SignalRDemo.Hubs
 {
     public class KillingGameHub : Hub
     {
-        static KillingGameHub()
-        {
-            _game.Initialize();
-        }
+        //static KillingGameHub()
+        //{
+        //    _game.Initialize();
+        //}
+
+        //public KillingGameHub()
+        //{
+        //    _game.Initialize();
+        //}
         public void Hello()
         {
             Clients.All.hello();
         }
 
-        public void AssignRole()
+        public void JoinRoom(string roomName = null)
         {
-            Role role = _game.roleManager.GetRole();
+            GameRoom room = grm.AllocRoom(roomName);
+            room.PlayerManager.All.Add(new Player("new"));
+        }
+
+        public void LeaveRoom(string roomName)
+        {
+            GameRoom room = grm.All.Find(x => x.Name == roomName);
+            room.PlayerManager.All.RemoveAll(x => x.Name == "new");
+        }
+
+        public void AssignRole(string roleName = null)
+        {
+            if(_game == null)
+            {
+                _game = new KillingGame();
+                _game.Initialize();
+            }
+            Role role = _game.RoleManager.GetRole();
             Clients.Caller.ReceiveRole(role);
         }
 
-        static private KillingGame _game = new KillingGame();
+        private KillingGame _game = null;
+
+        static private GameRoomManager grm = new GameRoomManager();
     }
 }

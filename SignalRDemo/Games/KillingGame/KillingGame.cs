@@ -10,9 +10,9 @@ namespace SignalRDemo.Games.KillingGame
     {
         public override void Initialize()
         {
-            roleManager.LoadRole(new Killer(2));
-            roleManager.LoadRole(new Police(2));
-            roleManager.LoadRole(new Farmer(5));
+            RoleManager.All.Add(new Killer(2));
+            RoleManager.All.Add(new Police(2));
+            RoleManager.All.Add(new Farmer(5));
         }
     }
 }

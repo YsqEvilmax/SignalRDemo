@@ -247,12 +247,14 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Games\Game.cs" />
+    <Compile Include="Games\GameRoom.cs" />
     <Compile Include="Games\KillingGame\KillingGame.cs" />
     <Compile Include="Games\KillingGame\Roles\Farmer.cs" />
     <Compile Include="Games\KillingGame\Roles\Killer.cs" />
     <Compile Include="Games\KillingGame\Roles\Police.cs" />
+    <Compile Include="Games\Manager.cs" />
+    <Compile Include="Games\Player.cs" />
     <Compile Include="Games\Role.cs" />
-    <Compile Include="Games\RoleManager.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

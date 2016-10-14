@@ -39,7 +39,7 @@
 
             $('#sendmessage').click(function () {
                 // Call the Send method on the hub.
-                hubProxy.invoke('AssignRole');
+                hubProxy.invoke('AssignRole', $('#message').val());
                 //gameRoom.server.update({ Name: $('#displayname').val() });
                 // Clear text box and reset focus for next comment.
                 $('#message').val('').focus();
